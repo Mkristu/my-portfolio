@@ -1,0 +1,41 @@
+<section id="contact">
+    <div class="inner">
+        <header>
+            <h2>Get in Touch</h2>
+        </header>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input type="text" matInput [formControl]="name_surname" [errorStateMatcher]="matcher"
+                    placeholder="Name & Surname" />
+                <mat-error *ngIf="name_surname.hasError('required')">
+                    Your name and surname is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input type="text" matInput [formControl]="email" [errorStateMatcher]="matcher"
+                    placeholder="Email Address" />
+                <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="email.hasError('required')">
+                    Your email address is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <textarea matInput [formControl]="messageCtrl" [errorStateMatcher]="matcher" placeholder="Your message"
+                    #message maxlength="500"></textarea>
+                <mat-hint style="color: white;" align="end">{{message.value.length}} / 500</mat-hint>
+                <mat-error *ngIf="messageCtrl.hasError('required')">
+                    Please enter a message
+                </mat-error>
+            </mat-form-field>
+            <ul class="actions">
+                <li><input type="button" (click)="send()" [disabled]="!isFormValid()" value="Send Message"
+                        class="alt" /></li>
+                <li>
+                    <label style="color: white;">{{messageSendResult}}</label>
+                </li>
+            </ul>
+        </form>
+    </div>
+</section>
